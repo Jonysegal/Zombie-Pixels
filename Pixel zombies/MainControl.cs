@@ -15,13 +15,16 @@ namespace Pixel_zombies
         }
         static void Initialize()
         {
-
         }
-
         static void RunLoop()
         {
             while (true)
             {
+                KeyboardManager.Loop();
+                Config.Loop();
+
+                FullMap.Loop();
+                
                 Drawer.Loop();
             }
         }

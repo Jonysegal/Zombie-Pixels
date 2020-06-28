@@ -54,5 +54,9 @@ namespace Pixel_zombies
             ResetAt(from);
         }
 
+        public static void Loop()
+        {
+            modifiedPoints.Clear();
+        }
     }
 }

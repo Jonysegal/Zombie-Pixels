@@ -21,7 +21,7 @@ namespace Pixel_zombies
         static Image image;
         static Sprite sprite;
         const int WindowSize = 1000;
-        public static View view = new View(new Vector2f(300, 700), new Vector2f(400, 400));
+        public static View view = new View(new Vector2f(200, 800), new Vector2f(200, 200));
 
         
 
