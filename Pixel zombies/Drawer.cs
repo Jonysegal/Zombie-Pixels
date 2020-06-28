@@ -23,12 +23,7 @@ namespace Pixel_zombies
         const int WindowSize = 1000;
         public static View view = new View(new Vector2f(300, 700), new Vector2f(400, 400));
 
-        static readonly Dictionary<Tile.Type, Color> TypeColorMap = new Dictionary<Tile.Type, Color>()
-        {
-            {Tile.Type.Empty, ColorHelper.makeColor(75, 156, 211)},
-            {Tile.Type.Full, Color.White },
-            {Tile.Type.Signal, Color.Red }
-        };
+        
 
         static Drawer()
         {
@@ -51,7 +46,7 @@ namespace Pixel_zombies
             {
                 for (uint j = 0; j < WindowSize; j++)
                 {
-                    image.SetPixel(i, j, TypeColorMap[Tile.Type.Empty]);
+                    image.SetPixel(i, j, Tile.TypeColorMap[Tile.Type.Floor]);
                 }
             }
         }
@@ -60,10 +55,9 @@ namespace Pixel_zombies
         {
             foreach (var v in FullMap.modifiedPoints)
             {
-                image.SetPixel((uint)v.x, WindowSize - (uint)v.y, TypeColorMap[FullMap.ValueAtPoint(v).type]);
+                image.SetPixel((uint)v.x, WindowSize - (uint)v.y, FullMap.ValueAtPoint(v).GetDrawingColor());
             }
         }
-
 
         public static void Loop()
         {
