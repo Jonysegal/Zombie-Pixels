@@ -19,6 +19,9 @@ Thumbs.db
 *.cache
 *.ilk
 *.log
+*.dll
+*.csproj
+*.sln
 [Bb]in
 [Dd]ebug*/
 *.lib
@@ -30,3 +33,4 @@ _ReSharper*/
 .vs/
 #Nuget packages folder
 packages/
+/Pixel zombies.sln

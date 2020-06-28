@@ -20,7 +20,10 @@ namespace Pixel_zombies
 
         static void RunLoop()
         {
-
+            while (true)
+            {
+                Drawer.Loop();
+            }
         }
     }
 
