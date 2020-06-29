@@ -38,5 +38,18 @@ namespace Pixel_zombies
         }
 
         public void Reset() => map.Clear();
+
+        public List<T> All()
+        {
+            var toReturn = new List<T>();
+            foreach(var column in map)
+            {
+                foreach(var val in column.Value)
+                {
+                    toReturn.Add(val.Value);
+                }
+            }
+            return toReturn;
+        }
     }
 }

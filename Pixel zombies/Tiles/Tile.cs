@@ -12,9 +12,13 @@ public class Tile
 
     public enum Alliance { Red, Blue };
 
+    public enum SoldierType { Zombie, Ranged}
+
     public Type type;
 
     public Alliance alliance;
+
+    public SoldierType soldierType;
 
     public bool overridesColor = false;
 
