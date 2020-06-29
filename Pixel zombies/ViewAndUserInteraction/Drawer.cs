@@ -21,7 +21,7 @@ namespace Pixel_zombies
         static Image image;
         static Sprite sprite;
         const int WindowSize = 1000;
-        public static View view = new View(new Vector2f(200, 800), new Vector2f(200, 200));
+        public static View view = new View(new Vector2f(200, 800), new Vector2f(400, 400));
 
         
 
@@ -46,16 +46,21 @@ namespace Pixel_zombies
             {
                 for (uint j = 0; j < WindowSize; j++)
                 {
-                    image.SetPixel(i, j, Tile.TypeColorMap[Tile.Type.Floor]);
+                    if (i == 10 || j == 10 || i == WindowSize - 10 || j == WindowSize - 10)
+                        image.SetPixel(i, j, Color.Yellow);
+                    else
+                        image.SetPixel(i, j, Tile.TypeColorMap[Tile.Type.Floor]);
                 }
             }
         }
 
         static void SetPixelsFromDrawController()
         {
+            Console.WriteLine("new draw");
             foreach (var v in FullMap.modifiedPoints)
             {
-                image.SetPixel((uint)v.x, WindowSize - (uint)v.y, FullMap.ValueAtPoint(v).GetDrawingColor());
+                Console.WriteLine("setting " + v.ToString() + " to " + FullMap.GetAt(v).GetDrawingColor());
+                image.SetPixel((uint)v.x, WindowSize - (uint)v.y, FullMap.GetAt(v).GetDrawingColor());
             }
         }
 
