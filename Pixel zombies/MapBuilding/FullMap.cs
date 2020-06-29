@@ -14,8 +14,6 @@ namespace Pixel_zombies
 
         static GenericLocalMap<Tile> map = new GenericLocalMap<Tile>();
 
-        public static Tile ValueAtPoint(Point at) => map.ValueAt(at);
-
         public static Tile GetAt(Point getAt)
         {
             var value = map.ValueAt(getAt);
@@ -44,8 +42,6 @@ namespace Pixel_zombies
                 ModifyAt(new Tile(Tile.Type.Floor), resetAt);
             }
         }
-
-        public static List<PointTyle> PointTylesFrom(List<Point> selectFrom) => selectFrom.Select(x => new PointTyle(x, ValueAtPoint(x))).ToList();
 
         public static void MoveFromTo(Point from, Point to)
         {

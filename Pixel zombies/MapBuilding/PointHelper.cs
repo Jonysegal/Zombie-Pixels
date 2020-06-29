@@ -18,6 +18,8 @@ namespace Pixel_zombies
 
         public static Point PointInDirection(Point point, Direct.Direction direction) => PointInDirectionBy(point, direction, 1);
 
+        public static List<PointTyle> PointTylesFrom(List<Point> selectFrom) => selectFrom.Select(x => new PointTyle(x, FullMap.GetAt(x))).ToList();
+        
         public static List<Point> PointsInSquareAround(Point origin, int radius)
         {
             List<Point> toReturn = new List<Point>();
