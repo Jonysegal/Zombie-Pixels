@@ -45,6 +45,8 @@ namespace Pixel_zombies
             }
         }
 
+        public static List<PointTyle> PointTylesFrom(List<Point> selectFrom) => selectFrom.Select(x => new PointTyle(x, ValueAtPoint(x))).ToList();
+
         public static void MoveFromTo(Point from, Point to)
         {
             var original = GetAt(from);

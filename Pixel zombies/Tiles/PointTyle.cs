@@ -3,11 +3,11 @@
     public class PointTyle
     {
         public Point point;
-        public Tile.Type type;
-        public PointTyle(Point p, Tile.Type t)
+        public Tile tile;
+        public PointTyle(Point p, Tile t)
         {
             point = p;
-            type = t;
+            tile = t;
         }
     }
 }

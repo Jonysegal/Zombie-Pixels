@@ -10,7 +10,7 @@ namespace Pixel_zombies
 
         public static Point PointOffsetBy(Point p, Point offset) => new Point(p.x + offset.x, p.y + offset.y);
 
-        public static PointTyle PointTyleOffsetBy(PointTyle p, Point offset) => new PointTyle(PointOffsetBy(p.point, offset), p.type);
+        public static PointTyle PointTyleOffsetBy(PointTyle p, Point offset) => new PointTyle(PointOffsetBy(p.point, offset), p.tile);
 
         public static Point PointExbandedBy(Point p, int expandBy) => new Point(p.x * expandBy, p.y * expandBy);
 
