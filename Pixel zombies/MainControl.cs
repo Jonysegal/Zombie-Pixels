@@ -25,7 +25,9 @@ namespace Pixel_zombies
                 CameraControl.Loop();
 
                 FullMap.Loop();
-                
+
+                EntityControl.Loop();
+
                 Drawer.Loop();
                 Sleeper.Loop();
 

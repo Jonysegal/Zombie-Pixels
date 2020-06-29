@@ -8,11 +8,11 @@ namespace Pixel_zombies
 {
     public class Entity
     {
-        public PointTyle location;
+        public PointTyle pointTile;
         
-        public Entity()
+        public Entity(Tile values, Point location)
         {
-            location = new PointTyle(new Point(0, 0), new Tile(Tile.Type.Soldier, Tile.Alliance.Blue));
+            pointTile = new PointTyle(location, values);
         }
     }
 }
