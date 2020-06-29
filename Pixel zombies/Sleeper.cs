@@ -9,7 +9,7 @@ namespace Pixel_zombies
 {
     public static class Sleeper
     {
-        static double SleepTime = 50;
+        static double SleepTime = 1;
         public static void Sleep() => System.Threading.Thread.Sleep((int)SleepTime);
         public static void Loop()
         {

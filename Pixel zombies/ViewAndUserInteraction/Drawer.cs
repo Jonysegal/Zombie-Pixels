@@ -56,10 +56,10 @@ namespace Pixel_zombies
 
         static void SetPixelsFromDrawController()
         {
-            Console.WriteLine("new draw");
+           // Console.WriteLine("new draw");
             foreach (var v in FullMap.modifiedPoints)
             {
-                Console.WriteLine("setting " + v.ToString() + " to " + FullMap.GetAt(v).GetDrawingColor());
+             //   Console.WriteLine("setting " + v.ToString() + " to " + FullMap.GetAt(v).GetDrawingColor());
                 image.SetPixel((uint)v.x, WindowSize - (uint)v.y, FullMap.GetAt(v).GetDrawingColor());
             }
         }
