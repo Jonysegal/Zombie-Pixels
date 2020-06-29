@@ -22,10 +22,13 @@ namespace Pixel_zombies
             {
                 KeyboardManager.Loop();
                 Config.Loop();
+                CameraControl.Loop();
 
                 FullMap.Loop();
                 
                 Drawer.Loop();
+                Sleeper.Loop();
+
             }
         }
     }
