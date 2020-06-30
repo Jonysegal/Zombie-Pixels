@@ -12,13 +12,13 @@ namespace Pixel_zombies
 
         static EntityControl()
         {
-            MakeEntityAt(new Tile(Tile.Type.Soldier, Tile.Alliance.Blue), new Point(100, 100));
-            MakeEntityAt(new Tile(Tile.Type.Soldier, Tile.Alliance.Red), new Point(105, 100));
-            MakeEntityAt(new Tile(Tile.Type.Soldier, Tile.Alliance.Blue), new Point(110, 100));
-            MakeEntityAt(new Tile(Tile.Type.Soldier, Tile.Alliance.Red), new Point(115, 100));
+            MakeEntityAt(new Tile(Tile.Type.Soldier, Tile.Alliance.Blue, Tile.SoldierType.Zombie), new Point(100, 100));
+            MakeEntityAt(new Tile(Tile.Type.Soldier, Tile.Alliance.Red, Tile.SoldierType.Zombie), new Point(105, 100));
+            MakeEntityAt(new Tile(Tile.Type.Soldier, Tile.Alliance.Blue, Tile.SoldierType.Zombie), new Point(110, 100));
+            MakeEntityAt(new Tile(Tile.Type.Soldier, Tile.Alliance.Red, Tile.SoldierType.Zombie), new Point(115, 100));
         }
 
-        static void MakeEntityAt(Tile values, Point addAt)
+        public static void MakeEntityAt(Tile values, Point addAt)
         {
             var newEntity = new Entity(values, addAt);
             Entities.AddAt(newEntity, addAt);
@@ -27,7 +27,9 @@ namespace Pixel_zombies
 
         public static void Loop()
         {
-            Console.WriteLine(Entities.All().Count);
+            var all = Entities.All();
+            var redCount = all.Where(x => x.Alliance == Tile.Alliance.Red).Count();
+            Console.WriteLine(all.Count + " red " + (redCount) + " blue " + (all.Count - redCount));
             ManageAllEntities();
         }
 
@@ -43,11 +45,12 @@ namespace Pixel_zombies
 
         public static void Kill(PointTyle kill)
         {
-            Console.WriteLine("killing ");
             FullMap.ResetAt(kill.point);
             Entities.ValueAt(kill.point).pointTile.tile.type = Tile.Type.Floor;
             Entities.map[kill.point.x].Remove(kill.point.y);
         }
+
+        //TODO: fucking fix the map and entity movement
 
         static void ManageEntity(Entity toManage)
         {
@@ -56,8 +59,11 @@ namespace Pixel_zombies
                 return;
             var startPoint = toManage.pointTile.point;
             Entities.map[startPoint.x].Remove(startPoint.y);
+
             EntityRandomWalker.RandomWalkEntity(toManage);
             EntityFighter.FightForEntity(toManage);
+            EntityFoodManager.ManageFoodFor(toManage);
+
             Entities.AddAt(toManage, toManage.pointTile.point);
         }
     }

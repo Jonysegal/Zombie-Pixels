@@ -40,9 +40,10 @@ public class Tile
         this.type = type;
     }
 
-    public Tile(Type type, Alliance alliance) : this(type)
+    public Tile(Type type, Alliance alliance, SoldierType soldierType) : this(type)
     {
         this.alliance = alliance;
+        this.soldierType = soldierType;
     }
 
     public void OverrideColor(Color newColor)
