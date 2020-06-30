@@ -29,7 +29,7 @@ namespace Pixel_zombies
                 EntityControl.Loop();
 
                 Drawer.Loop();
-                Sleeper.Loop();
+             //   Sleeper.Loop();
 
             }
         }

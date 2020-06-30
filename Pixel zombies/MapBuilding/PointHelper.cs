@@ -18,7 +18,7 @@ namespace Pixel_zombies
 
         public static Point PointInDirection(Point point, Direct.Direction direction) => PointInDirectionBy(point, direction, 1);
 
-        public static List<PointTyle> PointTylesFrom(List<Point> selectFrom) => selectFrom.Select(x => new PointTyle(x, FullMap.GetAt(x))).ToList();
+        public static IEnumerable<PointTyle> PointTylesFrom(List<Point> selectFrom) => selectFrom.Select(x => new PointTyle(x, FullMap.GetAt(x)));
         
         public static List<Point> PointsInSquareAround(Point origin, int radius)
         {
@@ -33,11 +33,11 @@ namespace Pixel_zombies
             }
             return toReturn;
         }
-        public static List<Point> PointsInDirections(Point start, List<Direct.Direction> directions) => directions.Select(x => PointInDirection(start, x)).ToList();
+        public static IEnumerable<Point> PointsInDirections(Point start, List<Direct.Direction> directions) => directions.Select(x => PointInDirection(start, x));
 
-        public static List<Point> PointsInCardinalDirections(Point start) => PointsInDirections(start, Direct.CardinalDirections);
+        public static IEnumerable<Point> PointsInCardinalDirections(Point start) => PointsInDirections(start, Direct.CardinalDirections);
 
-        public static List<Point> PointsInDiagonalDirections(Point start) => PointsInDirections(start, Direct.DiagonalDirections);
+        public static IEnumerable<Point> PointsInDiagonalDirections(Point start) => PointsInDirections(start, Direct.DiagonalDirections);
 
         public static Point MidpointOf(Point a, Point b) => new Point((a.x + b.x) / 2, (a.y + b.y) / 2);
 

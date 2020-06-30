@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-
+using System.Linq;
 
 public static class ListHelper
 {
@@ -45,5 +45,12 @@ public static class ListHelper
         movingFor.RemoveAt(index);
         movingFor.Add(moving);
     }
+
+    public static T RandomElementInEnumerable<T>(this IEnumerable<T> enumerable)
+    {
+        int index = StaticRandom.Next(0, enumerable.Count());
+        return enumerable.ElementAt(index);
+    }
+
 
 }

@@ -33,8 +33,8 @@ namespace Pixel_zombies
         static void Duplicate(Entity duplicateFor)
         {
             var possiblePoints = EntityBrain.EmptyPointTylesAroundEntity(duplicateFor.pointTile);
-            if (possiblePoints.Count > 0)
-                EntityControl.MakeEntityAt(new Tile(Tile.Type.Soldier, duplicateFor.Alliance, duplicateFor.SoldierType), ListHelper.RandomElementInList(possiblePoints).point);
+            if (possiblePoints.Any())
+                EntityControl.MakeEntityAt(new Tile(Tile.Type.Soldier, duplicateFor.Alliance, duplicateFor.SoldierType), ListHelper.RandomElementInEnumerable(possiblePoints).point);
             
 
         }
