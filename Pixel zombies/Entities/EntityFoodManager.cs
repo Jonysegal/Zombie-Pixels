@@ -23,20 +23,17 @@ namespace Pixel_zombies
         {
             if(check.FoodCount >= Entity.FoodToCopy[check.SoldierType])
             {
-                check.FoodCount -= Entity.FoodToCopy[check.SoldierType];
-                Duplicate(check);
+                var possiblePoints = EntityBrain.EmptyPointTylesAroundEntity(check.pointTile);
+                if (possiblePoints.Count() == 8)
+                {
+                    EntityControl.MakeEntityAt(new Tile(Tile.Type.Soldier, check.Alliance, check.SoldierType), ListHelper.RandomElementInEnumerable(possiblePoints).point);
+                    check.FoodCount -= Entity.FoodToCopy[check.SoldierType];
+                }
             }
         }
 
         public static void IncrementFoodFor(Entity incrementFor, int by) => incrementFor.FoodCount += by;
         
-        static void Duplicate(Entity duplicateFor)
-        {
-            var possiblePoints = EntityBrain.EmptyPointTylesAroundEntity(duplicateFor.pointTile);
-            if (possiblePoints.Any())
-                EntityControl.MakeEntityAt(new Tile(Tile.Type.Soldier, duplicateFor.Alliance, duplicateFor.SoldierType), ListHelper.RandomElementInEnumerable(possiblePoints).point);
-            
-
-        }
+      
     }
 }
