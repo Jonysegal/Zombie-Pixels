@@ -27,9 +27,9 @@ namespace Pixel_zombies
 
         public static void Loop()
         {
-            var all = Entities.All();
-            var redCount = all.Where(x => x.Alliance == Tile.Alliance.Red).Count();
-            Console.WriteLine(all.Count + " red " + (redCount) + " blue " + (all.Count - redCount));
+            //var all = Entities.All();
+            //var redCount = all.Where(x => x.Alliance == Tile.Alliance.Red).Count();
+            //Console.WriteLine(all.Count + " red " + (redCount) + " blue " + (all.Count - redCount));
             ManageAllEntities();
         }
 

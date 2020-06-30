@@ -18,7 +18,7 @@ namespace Pixel_zombies
         static void FightForMelee(Entity entity)
         {
             var killTargets = EntityBrain.SoldierPointTylesAroundEntity(entity.pointTile).Where(x => x.tile.alliance != entity.Alliance);
-            if (killTargets.Count() > 0)
+            if (killTargets.Any())
                 EntityControl.Kill(ListHelper.RandomElementInEnumerable(killTargets));
 
         }

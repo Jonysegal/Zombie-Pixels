@@ -12,7 +12,7 @@ namespace Pixel_zombies
         {
             var options = EntityBrain.EmptyPointTylesAroundEntity(toWalk.pointTile);
             
-            if(options.Count() > 0)
+            if(options.Any())
             {
                 var moveTo = ListHelper.RandomElementInEnumerable(options).point;
                 FullMap.MoveFromTo(toWalk.pointTile.point, moveTo);
