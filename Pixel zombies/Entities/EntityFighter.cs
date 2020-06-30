@@ -17,14 +17,19 @@ namespace Pixel_zombies
         }
         static void FightForMelee(Entity entity)
         {
-            var killTargets = EntityBrain.SoldierPointTylesAroundEntity(entity.pointTile).Where(x => x.tile.alliance != entity.Alliance);
+            var killTargets = EntityBrain.SoldierPointTylesAroundEntity(entity.pointTile, 1).Where(x => x.tile.alliance != entity.Alliance);
             if (killTargets.Any())
                 EntityControl.Kill(ListHelper.RandomElementInEnumerable(killTargets));
 
         }
         static void FightForRanged(Entity entity)
         {
-
+            var killTargets = EntityBrain.SoldierPointTylesAroundEntity(entity.pointTile, 3).Where(x => x.tile.alliance != entity.Alliance);
+            if (killTargets.Any())
+            {
+                EntityControl.Kill(ListHelper.RandomElementInEnumerable(killTargets));
+                EntityFoodManager.IncrementFoodFor(entity, 1);
+            }
         }
     }
 }
