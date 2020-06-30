@@ -14,20 +14,39 @@ namespace Pixel_zombies
 
         static GenericLocalMap<Tile> map = new GenericLocalMap<Tile>();
 
-        public static Tile GetAt(Point getAt)
+        static Dictionary<int, Dictionary<int, bool>> secondMap = new Dictionary<int, Dictionary<int, bool>>();
+
+        static FullMap()
         {
-            var value = map.ValueAt(getAt);
-            if (value == null)
+            for(int i=0; i < Drawer.WindowSize; i++)
             {
-                var adding = new Tile(Tile.Type.Floor);
-                map.AddAt(adding, getAt);
-                return adding;
+                secondMap[i] = new Dictionary<int, bool>();
+                for(int j= 0; j < Drawer.WindowSize; j++)
+                {
+                    secondMap[i][j] = false;
+                }
             }
-            else
-                return value;
         }
 
-        public static void SetAt(Tile toSet, Point setAt) => map.AddAt(toSet, setAt);
+        static bool HasValueAt(Point at) => secondMap[at.x][at.y];
+
+        public static Tile GetAt(Point getAt)
+        {
+            if (HasValueAt(getAt))
+                return map.ForceValueAt(getAt);
+            else
+            {
+                var toSet = new Tile(Tile.Type.Floor);
+                SetAt(toSet, getAt);
+                return toSet;
+            }
+        }
+
+        public static void SetAt(Tile toSet, Point setAt)
+        {
+            secondMap[setAt.x][setAt.y] = true;
+            map.AddAt(toSet, setAt);
+        }
 
         public static void ModifyAt(Tile toSet, Point modifyAt)
         {

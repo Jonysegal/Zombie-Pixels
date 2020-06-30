@@ -20,7 +20,7 @@ namespace Pixel_zombies
         static Texture texture;
         static Image image;
         static Sprite sprite;
-        const int WindowSize = 1000;
+        public const int WindowSize = 1000;
         public static View view = new View(new Vector2f(100, 900), new Vector2f(100, 100));
 
         

@@ -10,6 +10,8 @@ namespace Pixel_zombies
     {
         public Dictionary<int, Dictionary<int, T>> map = new Dictionary<int, Dictionary<int, T>>();
 
+        public T ForceValueAt(Point at) => map[at.x][at.y];
+
         public T ValueAt(Point at)
         {
             if (HasValueAt(at))
