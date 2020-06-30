@@ -14,8 +14,8 @@ namespace Pixel_zombies
 
         public static readonly Dictionary<Tile.SoldierType, int> FoodToCopy = new Dictionary<Tile.SoldierType, int>()
         {
-            {Tile.SoldierType.Zombie, 15 },
-            {Tile.SoldierType.Ranged, 7 }
+            {Tile.SoldierType.Zombie, 10 },
+            {Tile.SoldierType.Ranged, 3 }
         };
         
         public static readonly Dictionary<Tile.SoldierType, int> PassiveFood = new Dictionary<Tile.SoldierType, int>()
