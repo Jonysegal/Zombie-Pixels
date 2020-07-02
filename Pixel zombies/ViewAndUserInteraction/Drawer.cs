@@ -46,10 +46,7 @@ namespace Pixel_zombies
             {
                 for (uint j = 0; j < WindowSize; j++)
                 {
-                    if (i == 10 || j == 10 || i == WindowSize - 10 || j == WindowSize - 10)
-                        image.SetPixel(i, j, Color.Yellow);
-                    else
-                        image.SetPixel(i, j, Tile.TypeColorMap[Tile.Type.Floor]);
+                    image.SetPixel(i, j, ColorControl.FloorColor) ;
                 }
             }
         }
@@ -60,7 +57,7 @@ namespace Pixel_zombies
             foreach (var v in FullMap.modifiedPoints)
             {
              //   Console.WriteLine("setting " + v.ToString() + " to " + FullMap.GetAt(v).GetDrawingColor());
-                image.SetPixel((uint)v.x, WindowSize - (uint)v.y, FullMap.GetAt(v).GetDrawingColor());
+                image.SetPixel((uint)v.x, WindowSize - (uint)v.y, ColorControl.ColorAtPoint(v));
             }
         }
 

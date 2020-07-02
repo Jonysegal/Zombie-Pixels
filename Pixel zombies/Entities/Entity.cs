@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SFML.Graphics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,14 @@ namespace Pixel_zombies
         public PointTyle pointTile;
 
         public int FoodCount = 0;
+
+        public enum Type {Wall, Zombo};
+
+        public Type type = Type.Wall;
+
+        public bool overridesColor = false;
+
+        public Color overrideColor;
 
         public static readonly Dictionary<Tile.SoldierType, int> FoodToCopy = new Dictionary<Tile.SoldierType, int>()
         {

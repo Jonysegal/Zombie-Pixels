@@ -28,7 +28,7 @@ namespace Pixel_zombies
             }
         }
 
-        static bool HasValueAt(Point at) => secondMap[at.x][at.y];
+        public static bool HasValueAt(Point at) => secondMap[at.x][at.y];
 
         public static Tile GetAt(Point getAt)
         {
@@ -40,6 +40,12 @@ namespace Pixel_zombies
                 SetAt(toSet, getAt);
                 return toSet;
             }
+        }
+
+        //this is all obviously temporary
+        public static Entity GetAtSecond(Point GetAtSecond)
+        {
+            return new Entity(new Tile(Tile.Type.Soldier), GetAtSecond);
         }
 
         public static void SetAt(Tile toSet, Point setAt)
