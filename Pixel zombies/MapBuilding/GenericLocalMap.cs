@@ -12,23 +12,6 @@ namespace Pixel_zombies
 
         public T ForceValueAt(Point at) => map[at.x][at.y];
 
-        public T ValueAt(Point at)
-        {
-            if (HasValueAt(at))
-                return map[at.x][at.y];
-            return default;
-        }
-
-        public bool HasValueAt(Point at)
-        {
-            var columnOfPoint = GetColumnAt(at.x);
-            if (columnOfPoint.Count == 0)
-                return false;
-            if (!columnOfPoint.ContainsKey(at.y))
-                return false;
-            return true;
-        }
-
         public void AddAt(T toAdd, Point addAt) => GetColumnAt(addAt.x)[addAt.y] = toAdd;
 
         Dictionary<int, T> GetColumnAt(int x) => map.TryGetValue(x, out var column) ? column : AddColumnAt(x);
@@ -38,8 +21,6 @@ namespace Pixel_zombies
             map[x] = new Dictionary<int, T>();
             return map[x];
         }
-
-        public void Reset() => map.Clear();
 
         public List<T> All()
         {

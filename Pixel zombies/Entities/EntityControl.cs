@@ -5,48 +5,55 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
 using SFML.Window;
+using static Pixel_zombies.Zombo;
+using static Pixel_zombies.Entity;
 
 namespace Pixel_zombies
 {
     public static class EntityControl
     {
-        public static GenericLocalMap<Entity> Entities = new GenericLocalMap<Entity>();
+
+        static List<Zombo> zombos = new List<Zombo>();
 
         static EntityControl()
         {
-            MakeEntityAt(new Tile(Tile.Type.Soldier, Tile.Alliance.Blue, Tile.SoldierType.Ranged), new Point(488, 512));
-            MakeEntityAt(new Tile(Tile.Type.Soldier, Tile.Alliance.Blue, Tile.SoldierType.Ranged), new Point(500, 512));
-            MakeEntityAt(new Tile(Tile.Type.Soldier, Tile.Alliance.Blue, Tile.SoldierType.Ranged), new Point(512, 512));
-            MakeEntityAt(new Tile(Tile.Type.Soldier, Tile.Alliance.Blue, Tile.SoldierType.Ranged), new Point(488, 500));
-            MakeEntityAt(new Tile(Tile.Type.Soldier, Tile.Alliance.Blue, Tile.SoldierType.Ranged), new Point(512, 500));
-            MakeEntityAt(new Tile(Tile.Type.Soldier, Tile.Alliance.Blue, Tile.SoldierType.Ranged), new Point(488, 488));
-            MakeEntityAt(new Tile(Tile.Type.Soldier, Tile.Alliance.Blue, Tile.SoldierType.Ranged), new Point(500, 488));
-            MakeEntityAt(new Tile(Tile.Type.Soldier, Tile.Alliance.Blue, Tile.SoldierType.Ranged), new Point(512, 488));
-            MakeEntityAt(new Tile(Tile.Type.Soldier, Tile.Alliance.Red, Tile.SoldierType.Zombie), new Point(500, 500));
+            MakeZomboAt(ZomboType.Zombie, Alliance.Red, new Point(500, 500));
         }
 
-        public static void MakeEntityAt(Tile values, Point addAt)
+        public static void AddEntityAt(EntityType type, Point addAt)
         {
-            var newEntity = new Entity(values, addAt);
-            Entities.AddAt(newEntity, addAt);
-            FullMap.SetAt(values, addAt);
+            var entity = new Entity(type, addAt);
+            FullMap.SetAt(entity);
+        }
+
+        public static void MakeZomboAt(ZomboType type, Alliance alliance, Point at)
+        {
+            var zombo = new Zombo(type, alliance, at);
+            FullMap.SetAt(zombo);
+            zombos.Add(zombo);
+        }
+
+        public static void DuplicateZomboAt(Zombo toDuplicate, Point duplicateAt) => MakeZomboAt(toDuplicate.zomboType, toDuplicate.alliance, duplicateAt);
+
+        public static void MoveZomboTo(Zombo zombo, Point moveTo)
+        {
+            FullMap.ResetAt(zombo.location);
+            zombo.location = moveTo;
+            FullMap.SetAt(zombo);
         }
 
         public static void Loop()
         {
-            var all = Entities.All();
-            var redCount = all.Where(x => x.Alliance == Tile.Alliance.Red).Count();
-            Console.WriteLine(all.Count + " red " + (redCount) + " blue " + (all.Count - redCount));
-            ManageAllEntities();
+            ManageAllZombos();
         }
 
-        static void ManageAllEntities()
+        static void ManageAllZombos()
         {
-            var AllEntitiesAtStart = new List<Entity>(Entities.All());
+            var allZombosAtStart = new List<Zombo>(zombos);
 
-            foreach(var entity in AllEntitiesAtStart)
+            foreach(var entity in allZombosAtStart)
             {
-                ManageEntity(entity);
+                ManageZombo(entity);
             }
         }
 
@@ -56,57 +63,35 @@ namespace Pixel_zombies
             {
 
                 Console.WriteLine("CULLING");
-                var allCount = Entities.All().Count();
-                var all = Entities.All();
-                if (allCount > 1000)
+                if (zombos.Count > 1000)
                 {
-
-                    for (int i = allCount - 1; i >= 0; i--)
-                    {
-                        if (i % 10 != 0)
-                            Kill(all[i].pointTile);
-                    }
+                    Cull();
                 }
             }
         }
 
         static void Cull()
         {
-            var allCount = Entities.All().Count();
-            var all = Entities.All();
-            if (allCount > 1000)
+            for (int i = zombos.Count - 1; i >= 0; i--)
             {
-
-                for (int i = allCount - 1; i >= 0; i--)
-                {
-                    if (i % 10 != 0)
-                        Kill(all[i].pointTile);
-                }
+                if (i % 10 != 0)
+                    Kill(zombos[i]);
             }
         }
 
-        public static void Kill(PointTyle kill)
+        public static void Kill(Zombo toKill)
         {
-            FullMap.ResetAt(kill.point);
-            Entities.ValueAt(kill.point).pointTile.tile.type = Tile.Type.Floor;
-            Entities.map[kill.point.x].Remove(kill.point.y);
+            FullMap.ResetAt(toKill.location);
+            zombos.Remove(toKill);
         }
 
-        //TODO: fucking fix the map and entity movement
+        //TODO: add some killed flag to the zombo killed above to indicate that it shouldn't execute. also affects below
 
-        static void ManageEntity(Entity toManage)
+        static void ManageZombo(Zombo toManage)
         {
-            //Can be set to floor when the entity is killed
-            if (toManage.pointTile.tile.type == Tile.Type.Floor)
-                return;
-            var startPoint = toManage.pointTile.point;
-            Entities.map[startPoint.x].Remove(startPoint.y);
-
-            EntityRandomWalker.RandomWalkEntity(toManage);
-            EntityFighter.FightForEntity(toManage);
-            EntityFoodManager.ManageFoodFor(toManage);
-
-            Entities.AddAt(toManage, toManage.pointTile.point);
+            ZomboRandomWalker.RandomWalkZombo(toManage);
+            ZomboFighter.FightForZombo(toManage);
+            ZomboFoodManager.ManageFoodFor(toManage);
         }
     }
 }

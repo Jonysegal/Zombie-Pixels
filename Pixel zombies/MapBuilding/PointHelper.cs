@@ -10,16 +10,12 @@ namespace Pixel_zombies
 
         public static Point PointOffsetBy(Point p, Point offset) => new Point(p.x + offset.x, p.y + offset.y);
 
-        public static PointTyle PointTyleOffsetBy(PointTyle p, Point offset) => new PointTyle(PointOffsetBy(p.point, offset), p.tile);
-
         public static Point PointExbandedBy(Point p, int expandBy) => new Point(p.x * expandBy, p.y * expandBy);
 
         public static Point PointInDirectionBy(Point point, Direct.Direction direction, int moveBy) => PointOffsetBy(point, PointExbandedBy(Direct.DirectionPointMap[direction], moveBy));
 
         public static Point PointInDirection(Point point, Direct.Direction direction) => PointInDirectionBy(point, direction, 1);
 
-        public static IEnumerable<PointTyle> PointTylesFrom(List<Point> selectFrom) => selectFrom.Select(x => new PointTyle(x, FullMap.GetAt(x)));
-        
         public static List<Point> PointsInSquareAround(Point origin, int radius)
         {
             List<Point> toReturn = new List<Point>();
@@ -54,6 +50,20 @@ namespace Pixel_zombies
             }
             return toReturn;
         }
+
+        public static List<Point> PointsAroundPoint(Point point, int rad) => PointHelper.PointsInSquareAround(point, rad);
+
+        public static IEnumerable<Point> EmptyPointsAroundPoint(Point point, int rad = 1) => PointsAroundPoint(point, rad).Where(FullMap.DoesNotHaveEntityAt);
+
+        public static IEnumerable<Point> OccupiedPointsAroundPoint(Point point, int rad = 1) => PointsAroundPoint(point, rad).Where(FullMap.HasEntityAt);
+
+        public static IEnumerable<Point> SoldierPointsAroundPoint(Point point, int rad = 1) => OccupiedPointsAroundPoint(point, rad).Where(x => FullMap.GetAt(x).IsZombo());
+
+        public static IEnumerable<Zombo> ZombosFromPoints(IEnumerable<Point> points) => points.Select(x => (Zombo)FullMap.GetAt(x));
+
+        //TODO: will this cast keep the valus that it had when put into the fullmap or defualt like as a new zombo?
+
+        public static IEnumerable<Zombo> ZombosAroundPoint(Point point, int rad = 1) => ZombosFromPoints(SoldierPointsAroundPoint(point, rad));
 
     }
 
