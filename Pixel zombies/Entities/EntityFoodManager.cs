@@ -23,7 +23,7 @@ namespace Pixel_zombies
         {
             if(check.FoodCount >= Entity.FoodToCopy[check.SoldierType])
             {
-                var possiblePoints = EntityBrain.EmptyPointTylesAroundEntity(check.pointTile);
+                var possiblePoints = EntityBrain.EmptyPointTylesAroundPoint(check.pointTile.point);
                 if (possiblePoints.Count() == 8)
                 {
                     EntityControl.MakeEntityAt(new Tile(Tile.Type.Soldier, check.Alliance, check.SoldierType), ListHelper.RandomElementInEnumerable(possiblePoints).point);

@@ -10,7 +10,7 @@ namespace Pixel_zombies
     {
         public static void RandomWalkEntity(Entity toWalk)
         {
-            var options = EntityBrain.EmptyPointTylesAroundEntity(toWalk.pointTile);
+            var options = EntityBrain.EmptyPointTylesAroundPoint(toWalk.pointTile.point);
             
             if(options.Any())
             {

@@ -48,8 +48,6 @@ namespace Pixel_zombies
             {
                 ManageEntity(entity);
             }
-
-          
         }
 
         static void CullCheck()
