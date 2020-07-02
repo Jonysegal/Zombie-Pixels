@@ -10,7 +10,7 @@ public class Tile
     //Bright ground is just for debugging
     public enum Type { Floor, Soldier };
 
-    public enum Alliance { Red, Blue };
+    public enum Alliance { Red, Blue, Green };
 
     public enum SoldierType { Zombie, Ranged}
 
@@ -32,7 +32,8 @@ public class Tile
     static readonly Dictionary<Alliance, Color> AllianceColorMap = new Dictionary<Alliance, Color>()
     {
         {Alliance.Red, Color.Red },
-        {Alliance.Blue, Color.Blue }
+        {Alliance.Blue, Color.Blue },
+        {Alliance.Green, Color.Green }
     };
 
     public Tile(Type type)

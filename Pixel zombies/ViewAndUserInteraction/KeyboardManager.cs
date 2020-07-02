@@ -18,7 +18,8 @@ namespace Pixel_zombies
             Keyboard.Key.S,
             Keyboard.Key.A,
             Keyboard.Key.P,
-            Keyboard.Key.O
+            Keyboard.Key.O,
+            Keyboard.Key.Space
         };
 
         public static void Loop()

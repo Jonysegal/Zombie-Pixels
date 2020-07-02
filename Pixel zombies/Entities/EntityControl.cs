@@ -38,8 +38,6 @@ namespace Pixel_zombies
             var redCount = all.Where(x => x.Alliance == Tile.Alliance.Red).Count();
             Console.WriteLine(all.Count + " red " + (redCount) + " blue " + (all.Count - redCount));
             ManageAllEntities();
-            if (Keyboard.IsKeyPressed(Keyboard.Key.P))
-                Entity.FoodToCopy[Tile.SoldierType.Zombie] = 1000000000;
         }
 
         static void ManageAllEntities()
@@ -70,6 +68,21 @@ namespace Pixel_zombies
                         if (i % 10 != 0)
                             Kill(all[i].pointTile);
                     }
+                }
+            }
+        }
+
+        static void Cull()
+        {
+            var allCount = Entities.All().Count();
+            var all = Entities.All();
+            if (allCount > 1000)
+            {
+
+                for (int i = allCount - 1; i >= 0; i--)
+                {
+                    if (i % 10 != 0)
+                        Kill(all[i].pointTile);
                 }
             }
         }
