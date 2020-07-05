@@ -56,7 +56,7 @@ namespace Pixel_zombies
            // Console.WriteLine("new draw");
             foreach (var v in FullMap.modifiedPoints)
             {
-             //   Console.WriteLine("setting " + v.ToString() + " to " + FullMap.GetAt(v).GetDrawingColor());
+                //Console.WriteLine("setting " + v.ToString() + " to " + ColorControl.ColorAtPoint(v) ) ;
                 image.SetPixel((uint)v.x, WindowSize - (uint)v.y, ColorControl.ColorAtPoint(v));
             }
         }

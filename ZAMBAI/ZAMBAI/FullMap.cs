@@ -39,6 +39,9 @@ namespace Pixel_zombies
 
         public static void SetAt(Entity toSet)
         {
+            //We don't do any fancy checking to see if we can ignore the modification here as setting is almost always (always as of july 5th) 
+            //going from an empty floor (ie black) to an entity) ie any other color.
+            NotifyOfModification(toSet.location);
             hasEntityMap[toSet.location.x][toSet.location.y] = true;
             map.AddAt(toSet, toSet.location);
         }
@@ -57,6 +60,20 @@ namespace Pixel_zombies
         public static void Loop()
         {
             modifiedPoints.Clear();
+        }
+
+        public static void PrintEntityMap()
+        {
+            for(int i=0; i < Drawer.WindowSize; i++)
+            {
+                for(int j = 0; j < Drawer.WindowSize; j++)
+                {
+                    if (hasEntityMap[i][j])
+                    {
+                        Console.WriteLine("has enttity at " + new Point(i, j).ToString());
+                    }
+                }
+            }
         }
     }
 }
