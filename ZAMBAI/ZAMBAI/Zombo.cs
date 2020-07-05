@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,8 @@ namespace Pixel_zombies
 
         public ZomboType zomboType;
 
+        private bool _alive = true;
+
         public Zombo(ZomboType type, Alliance alliance, Point point) : base(EntityType.Zombo, point)
         {
             this.alliance = alliance;
@@ -28,5 +31,11 @@ namespace Pixel_zombies
         public bool IsZombie() => zomboType == ZomboType.Zombie;
 
         public bool IsRanged() => zomboType == ZomboType.Ranged;
+
+        public void Die() => _alive = false;
+
+        public bool IsDead() => !_alive;
+
+        public bool IsAlive() => _alive;
     }
 }

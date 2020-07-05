@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using SFML.Window;
 using static Pixel_zombies.Zombo;
 using static Pixel_zombies.Entity;
+using System.Security.Principal;
 
 namespace Pixel_zombies
 {
@@ -87,12 +88,15 @@ namespace Pixel_zombies
         {
             FullMap.ResetAt(toKill.location);
             zombos.Remove(toKill);
+            toKill.Die();
         }
 
         //TODO: add some killed flag to the zombo killed above to indicate that it shouldn't execute. also affects below
 
         static void ManageZombo(Zombo toManage)
         {
+            if (toManage.IsDead())
+                return;
             ZomboRandomWalker.RandomWalkZombo(toManage);
             ZomboFighter.FightForZombo(toManage);
             ZomboFoodManager.ManageFoodFor(toManage);
