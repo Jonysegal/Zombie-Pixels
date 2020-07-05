@@ -1,9 +1,0 @@
-﻿Here's how i wanna improve the thing:
-get rid of tiles. fug that. either the space is empty and there's nothing there in the bool map, or there's something there and it's an entity and that has definitions.
-get rid of pointtyles. fug that too. anything mobile (ie zombos) will have a point member that's used for that type of shizz
-
-
-it's possible that this modifiedpoints system is actually a regression, ie something moves off a point and then that point is re occupied. that point is drawn when it shouldn't be maybe?
-
-
-maybe add some unset types to enums so if anything is taht something went wrong? could do
