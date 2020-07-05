@@ -16,6 +16,11 @@ namespace Pixel_zombies
 
         static EntityControl()
         {
+            foreach(Point p in PointHelper.PointsInRegionBetween(new Point(490, 490), new Point(510, 510)))
+            {
+                if (p.x % 10 == 0 && p.y % 10 == 0 && (p.y != 500 || p.x != 500))
+                    MakeZomboAt(ZomboType.Ranged, Alliance.Blue, p);
+            }
             MakeZomboAt(ZomboType.Zombie, Alliance.Red, new Point(500, 500));
         }
 
