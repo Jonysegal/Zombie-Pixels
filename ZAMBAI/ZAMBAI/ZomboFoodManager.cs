@@ -13,7 +13,7 @@ namespace Pixel_zombies
         public static readonly Dictionary<ZomboType, int> FoodToCopy = new Dictionary<ZomboType, int>()
         {
             {ZomboType.Zombie, 10 },
-            {ZomboType.Ranged, 3 }
+            {ZomboType.Ranged, 7 }
         };
 
         public static readonly Dictionary<ZomboType, int> PassiveFood = new Dictionary<ZomboType, int>()
